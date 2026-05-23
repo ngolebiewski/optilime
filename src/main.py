@@ -3,7 +3,7 @@ import platform
 import os
 
 def main():
-    print("Opticode -- Desktop image resizing for the web and gif maker with Python!")
+    print("🍋‍🟩 Optilime 📸 -- Desktop image resizing for the web and gif maker with Python!")
         # Mac performance tweak: ensures the window comes to the front
     if platform.system() == "Darwin":
         os.system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')

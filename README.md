@@ -1,4 +1,4 @@
-# Optilime 🍋‍🟩
+# 📸 Optilime 🍋‍🟩
 ## Image Resizer Desktop Program
 
 ** NOTE: NO GENERATIVE AI HAS OR WILL BE USED IN THIS PROJECT **
@@ -32,10 +32,10 @@ Eventually, I want to try and bundle this as an app, so may have to go into XCod
 - Use a lime as the imagery. Optics + Lime...
 
 ## PLAN
-- [x] Experiment with and learn tkinter through documentation. Make button, open files, show images, etc.
+- [x] Experiment with and learn tkinter through documentation. Make button, open files, show images, etc. Note, may need to explore Pyside6 as an alternate desktop GUI option. 
 - [ ] Write Pillow functions for transforming images and tests using pytest. This will be an issue with many sub issues. Use rawpy library to add in Pillow functionality for camera raw files. 
 - [ ] Write ffmpeg scripts for .mov and .mpf to animated gif processing flows. Stretch: images to mov flows.
-- [ ] Make GUI in tkinter to see, preview and edit/transform images.
+- [ ] Make GUI in tkinter to see, preview and edit/transform images. Pillow has a tk
 - [ ] Bundle with pyintstaller(?) to be stand alone MacOSx and Linux(?) desktop app and release. 
 
 ## TECH
@@ -44,7 +44,7 @@ Eventually, I want to try and bundle this as an app, so may have to go into XCod
     - *Plugins*
         - [pillow-heif](https://pypi.org/project/pillow-heif/): Python bindings to libheif for working with HEIF images.
         - [Raw Py](https://letmaik.github.io/rawpy/index.html) and [Numpy](numpy.org): Import raw image files from fancy cameras
-
+- [Departure Mono](https://departuremono.com/): Open source font, "a monospaced pixel font with a lo-fi technical vibe" -- **My favorite font**
 
 ## DEV NOTES
 
