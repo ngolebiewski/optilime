@@ -24,6 +24,8 @@ I have heard of tkinter, i also thought about using Curses or Textable for a Ter
 
 https://docs.python.org/3/library/tkinter.html
 
+With tkinter, I like how it is part of Python's built-in library. A more robust GUI framework would inevitable abstract the process more, and I like this being as close to Python as possible. Out of scopre would be writing directly in C to interface with Apple's Metal Graphics library and to get as close to the hardware as possible, although that does sound like fun. 
+
 Eventually, I want to try and bundle this as an app, so may have to go into XCode territory and finally pay that $99 Annual fee to Apple to become a developer that can sign for an app that doesn't get the "WARNING THIS WAS DOWNLOADED FROM THE INTERNET" error. 
 
 ## NOTES
@@ -35,3 +37,7 @@ Eventually, I want to try and bundle this as an app, so may have to go into XCod
 - [] Write ffmpeg scripts for .mov and .mpf to animated gif processing flows. Stretch: images to mov flows.
 - [] Make GUI in tkinter to see, preview and edit/transform images.
 - [] Bundle with pyintstaller(?) to be stand alone MacOSx and Linux(?) desktop app and release. 
+
+## TECH
+- Pytest: Testing
+- Pillow: Image processing
