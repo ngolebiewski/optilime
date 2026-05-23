@@ -42,15 +42,24 @@ Eventually, I want to try and bundle this as an app, so may have to go into XCod
 - [Pytest](https://docs.pytest.org/en/stable/): Testing
 - [Pillow](https://pillow.readthedocs.io/en/stable/): Image processing
     - *Plugins*
-        -[pillow-heif](https://pypi.org/project/pillow-heif/): Python bindings to libheif for working with HEIF images.
-        -[Raw Py](https://letmaik.github.io/rawpy/index.html): Import raw image files from fancy cameras
+        - [pillow-heif](https://pypi.org/project/pillow-heif/): Python bindings to libheif for working with HEIF images.
+        - [Raw Py](https://letmaik.github.io/rawpy/index.html) and [Numpy](numpy.org): Import raw image files from fancy cameras
 
 
 ## DEV NOTES
 
 ### tkinter
-- While setting up the app, I started to think about the architecture, and landed on dividing the GUI into its own folder/module and then the same for the image processing side of things. I think to take some of the boilerplate out of writing classes, I will import Python's built-in dataclass library=...
+- While setting up the app, I started to think about the architecture, and landed on dividing the GUI into its own folder/module and then the same for the image processing side of things. 
 
+- Finding that it is really unresponsive and flaky on my mac, for a simple test with a button that just changes text. Is it the virtual environment? Or just Tkinter?
+
+### Pillow and image processing in 📂 image_mod
+- Note, I a made all of the images that are in the test image folder. The Sony raw file is fairly large, you are warned.
+- Constants file for things like raw photo extension types, etc.
+- img_transformer.py
+    - This is where the functions are kept
+    - file opener (handles regular and raw)
+    - image to web jpeg as the first feature
 
 ### Make requirements file
 `pip freeze > requirements.txt`
