@@ -1,12 +1,43 @@
 from PIL import Image
 import os, sys
+import rawpy
 from pillow_heif import register_heif_opener
+
+# This enables the program to read iPhone specific HEIF files
 register_heif_opener()
+
+RAW_EXTENSIONS = {
+    # Major camera brands, I'll be testing .arw
+    '.nef', '.nrw',                  # Nikon
+    '.cr2', '.cr3', '.crw',          # Canon
+    '.arw', '.srf', '.sr2',          # Sony
+    
+    # Fujifilm & Panasonic
+    '.raf',                          # Fujifilm
+    '.rw2',                          # Panasonic / Lumix
+    
+    # Medium Format & High-End Studio
+    '.iiq',                          # Phase One
+    '.3fr', '.fff',                  # Hasselblad
+    
+    # Other Common Brands
+    '.dng',                          # Adobe Universal Standard (Leica, Ricoh, mobile phones)
+    '.orf', '.ori',                  # Olympus / OM System
+    '.pef', '.ptx',                  # Pentax
+    '.srw',                          # Samsung
+    
+    # Cinematic / Video-centric Cameras
+    '.rwl',                          # Leica
+    '.gpr',                          # GoPro
+    '.bay'                           # Casio
+}
 
 def main():
     print("PILLOW image processor wrapper")
-    img_to_web_jpg("./snes-controller.png","high", (300,100),'BILINEAR', bg_color=(100,200,255))
+    img_to_web_jpg("./sample_images/snes-controller.png","high", (300,100),'BILINEAR', bg_color=(100,200,255))
     img_to_web_jpg("./sample_images/iphone_art_ribbon.HEIC","medium", (1000,1000))
+    img_to_web_jpg("./sample_images/aurora.ARW","maximum", (2000,2000),"BILINEAR")
+    img_to_web_jpg("./sample_images/not_a_real_image.ARW","maximum", (2000,2000),"BILINEAR")
 
 # For a first image related function, lets just resize a jpg for the web, and also use the quality
 def img_to_web_jpg(infile, quality="maximum", new_size=(-1,-1), resample="LANCZOS", bg_color = (200, 200, 200)):
@@ -17,7 +48,7 @@ def img_to_web_jpg(infile, quality="maximum", new_size=(-1,-1), resample="LANCZO
 
     outfile = f + "_web" + ".jpg"
     try:
-        with Image.open(infile) as img:
+        with open_any_image(infile) as img:
             # for PNGs tests for the alpha/transparency layer.
             if img.mode in ("RGBA", "P"):
                 if img.mode == "P":
@@ -61,6 +92,7 @@ def img_to_web_jpg(infile, quality="maximum", new_size=(-1,-1), resample="LANCZO
                 filter_enum = getattr(Image.Resampling, resample, Image.Resampling.LANCZOS)
                 img = img.resize((new_w, new_h), resample=filter_enum)
             
+            # How do we specify where to save?
             img.save(outfile, quality=quality)
     except OSError as e:
         print("cannot convert", infile)
@@ -68,10 +100,29 @@ def img_to_web_jpg(infile, quality="maximum", new_size=(-1,-1), resample="LANCZO
 
 def open_any_image(infile):
     '''
-    This should be a robust function for opening ANY format image file, so that the tesr of our code can work with it.
-    This should work with jpg, png, gif, TIFF, RAW files (via rawpy), and HEIF which are native to iPhones.
+    A robust function for opening ANY format image file, so that the our code can work with it.
+    Works with jpg, png, gif, TIFF, RAW files (via rawpy), and HEIF which are native to iPhones.
     '''
-    pass
+    
+    # Make sure this is a valid path
+    if not os.path.exists(infile):
+        raise FileNotFoundError("File not found: ", infile)
+    
+    _, ext = os.path.splitext(infile.lower())
+    
+    if ext in RAW_EXTENSIONS:
+        print("Processing RAW file: ", {infile})
+        with rawpy.imread(infile) as raw: 
+            # postprocess() extracts the raw pixels into a NumPy RGB array
+            rgb_array = raw.postprocess()
+            # Convert the raw pixel array directly into a native Pillow Image
+            return Image.fromarray(rgb_array)
+    else:
+        # Handles standard types (PNG, JPG, TIFF, etal.) and HEIC via the registered plugin pillow+heif
+        print("Opening standard/HEIC image via Pillow: ", infile)
+        img = Image.open(infile)
+        img.load() 
+        return img
 
 if __name__ == "__main__":
     main()

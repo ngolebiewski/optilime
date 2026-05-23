@@ -32,20 +32,25 @@ Eventually, I want to try and bundle this as an app, so may have to go into XCod
 - Use a lime as the imagery. Optics + Lime...
 
 ## PLAN
-- [] Experiment with and learn tkinter through documentation. Make button, open files, show images, etc.
-- [] Write Pillow functions for transforming images and tests using pytest. This will be an issue with many sub issues. Use rawpy library to add in Pillow functionality for camera raw files.
-- [] Write ffmpeg scripts for .mov and .mpf to animated gif processing flows. Stretch: images to mov flows.
-- [] Make GUI in tkinter to see, preview and edit/transform images.
-- [] Bundle with pyintstaller(?) to be stand alone MacOSx and Linux(?) desktop app and release. 
+- [x] Experiment with and learn tkinter through documentation. Make button, open files, show images, etc.
+- [ ] Write Pillow functions for transforming images and tests using pytest. This will be an issue with many sub issues. Use rawpy library to add in Pillow functionality for camera raw files. 
+- [ ] Write ffmpeg scripts for .mov and .mpf to animated gif processing flows. Stretch: images to mov flows.
+- [ ] Make GUI in tkinter to see, preview and edit/transform images.
+- [ ] Bundle with pyintstaller(?) to be stand alone MacOSx and Linux(?) desktop app and release. 
 
 ## TECH
-- Pytest: Testing
-- Pillow: Image processing
+- [Pytest](https://docs.pytest.org/en/stable/): Testing
+- [Pillow](https://pillow.readthedocs.io/en/stable/): Image processing
     - *Plugins*
         -[pillow-heif](https://pypi.org/project/pillow-heif/): Python bindings to libheif for working with HEIF images.
+        -[Raw Py](https://letmaik.github.io/rawpy/index.html): Import raw image files from fancy cameras
 
 
 ## DEV NOTES
 
 ### tkinter
-- While setting up the app, I started to think about the architecture, and landed on dividing the GUI into its own folder/module and then the same for the image processing side of things. I think to take some of the boilerplate out of writing classes, I will import Python's built-in dataclass library=.
+- While setting up the app, I started to think about the architecture, and landed on dividing the GUI into its own folder/module and then the same for the image processing side of things. I think to take some of the boilerplate out of writing classes, I will import Python's built-in dataclass library=...
+
+
+### Make requirements file
+`pip freeze > requirements.txt`
