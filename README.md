@@ -41,3 +41,11 @@ Eventually, I want to try and bundle this as an app, so may have to go into XCod
 ## TECH
 - Pytest: Testing
 - Pillow: Image processing
+    - *Plugins*
+        -[pillow-heif](https://pypi.org/project/pillow-heif/): Python bindings to libheif for working with HEIF images.
+
+
+## DEV NOTES
+
+### tkinter
+- While setting up the app, I started to think about the architecture, and landed on dividing the GUI into its own folder/module and then the same for the image processing side of things. I think to take some of the boilerplate out of writing classes, I will import Python's built-in dataclass library=.

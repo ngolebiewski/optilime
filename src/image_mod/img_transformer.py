@@ -1,9 +1,12 @@
 from PIL import Image
 import os, sys
+from pillow_heif import register_heif_opener
+register_heif_opener()
 
 def main():
     print("PILLOW image processor wrapper")
     img_to_web_jpg("./snes-controller.png","high", (300,100),'BILINEAR', bg_color=(100,200,255))
+    img_to_web_jpg("./sample_images/iphone_art_ribbon.HEIC","medium", (1000,1000))
 
 # For a first image related function, lets just resize a jpg for the web, and also use the quality
 def img_to_web_jpg(infile, quality="maximum", new_size=(-1,-1), resample="LANCZOS", bg_color = (200, 200, 200)):
